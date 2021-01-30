@@ -9,9 +9,12 @@ class ZoneRecord extends Model
 {
     use HasFactory;
     protected $table = "zone_records";
-    protected $fillable = ['name'] ;
+    protected $fillable = ['name','A','AAAA','CNAME','TXT','NS'] ;
 
     function zone(){
         return $this->belongsTo(Zone::class,'zone_id');
+    }
+    function entries() {
+        return $this->hasMany(RecordEntry::class,'record_id');
     }
 }

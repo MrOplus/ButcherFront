@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EntryController;
 use App\Http\Controllers\RecordsController;
 use App\Http\Controllers\ZoneController;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,16 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard/record/zone/{zone_id}',[RecordsController::class , "showRecords"])->name('show-zone-record');
     Route::get('/dashboard/record/zone/{zone_id}/add/record',[RecordsController::class , "addRecord"])->name('add-zone-record');
+    Route::post('/dashboard/record/zone/{zone_id}/add/record',[RecordsController::class , "doAddRecord"])->name('add-zone-record');
+
+    Route::get('/dashboard/record/{record_id}/edit',[RecordsController::class , "editRecord"])->name('edit-zone-record');
+    Route::post('/dashboard/record/{record_id}/edit',[RecordsController::class , "doEditRecord"])->name('edit-zone-record');
+
+    Route::any('/dashboard/record/{record_id}/delete',[RecordsController::class , "deleteRecord"])->name('delete-zone-record');
+
+    Route::any('/dashboard/record/{record_id}/entries',[EntryController::class , "showEntries"])->name('show-zone-record-entries');
+
+
 
 
 
