@@ -1,19 +1,22 @@
 <?php
 
-namespace App\View\Components\app\zone;
+namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class edit extends Component
+class RecordSetting extends Component
 {
+    public $record;
+    public $type ;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($record,$type)
     {
-        //
+        $this->record = $record;
+        $this->type = $type;
     }
 
     /**
@@ -23,6 +26,6 @@ class edit extends Component
      */
     public function render()
     {
-        return view('components.app.zone.edit');
+        return view('components.record-setting');
     }
 }

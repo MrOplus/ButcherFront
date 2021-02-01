@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <x-appbar :zone="$zone->id">
             {{ $zone->name }} Records
-        </h2>
+        </x-appbar>
     </x-slot>
 
     <div class="py-12">
@@ -21,37 +21,31 @@
                                                     Record Name
                                                 </th>
                                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Zone Records
+                                                    Entries
                                                 </th>
                                                 <th scope="col" class="relative px-6 py-3">
-                                                    <span class="sr-only">Edit</span>
+                                                    <span class="sr-only">Settings</span>
                                                 </th>
                                             </tr>
                                             </thead>
                                             <tbody class="bg-white divide-y divide-gray-200">
                                             <tr>
-                                                @foreach(auth()->user()->zones as $property)
+                                                @foreach($zone->records as $record)
                                                     <td class="px-6 py-4 whitespace-nowrap">
                                                         <div class="flex items-center">
-                                                            <div class="flex-shrink-0 h-10 w-10">
-                                                                <img class="h-10 w-10 rounded-full" src="https://www.gravatar.com/avatar/{{md5($property->owner)}}" alt="">
-                                                            </div>
                                                             <div class="ml-4">
                                                                 <div class="text-sm font-medium text-gray-900">
-                                                                    {{$property->name}}
-                                                                </div>
-                                                                <div class="text-sm text-gray-500">
-                                                                    {{$property->owner}}
+                                                                    {{$record->name}}
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td class="px-6 py-4 whitespace-nowrap">
-                                                        <div class="text-sm text-gray-900">{{$property->records()->count()}}</div>
+                                                        <div class="text-sm text-gray-900">{{$record->entries()->count()}}</div>
                                                         <div class="text-sm text-gray-500"></div>
                                                     </td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                        <a href="{{action([\App\Http\Controllers\RecordsController::class,"showRecords"],$property->id)}}" class="text-indigo-600 hover:text-indigo-900">Records</a> | <a href="{{action([\App\Http\Controllers\ZoneController::class,"showZone"],$property->id)}}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                                        <a href="{{action([\App\Http\Controllers\EntryController::class,"showEntries"],$record->id)}}" class="text-indigo-600 hover:text-indigo-900">Entries</a> | <a href="{{action([\App\Http\Controllers\RecordsController::class,"editRecord"],$record->id)}}" class="text-indigo-600 hover:text-indigo-900">Settings</a> | <a href="{{action([\App\Http\Controllers\RecordsController::class,"deleteRecord"],$record->id)}}" class="text-indigo-600 hover:text-indigo-900">Delete</a>
                                                     </td>
                                             </tr>
                                             @endforeach

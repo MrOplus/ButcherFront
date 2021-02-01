@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Add New Record
-        </h2>
+        <x-appbar :zone="$zone->id">
+            Add Record > {{$zone->name}}
+        </x-appbar>
     </x-slot>
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <!-- Replace with your content -->
@@ -23,28 +23,60 @@
                             </div>
                         </div>
                         <div class="mt-5 md:mt-0 md:col-span-2">
-                            <form action="{{route('add-zone')}}" method="POST">
+                            <form action="{{route('add-zone-record',$zone->id)}}" method="POST">
                                 @csrf
                                 <div class="shadow sm:rounded-md sm:overflow-hidden">
                                     <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
                                         <div class="grid grid-cols-3 gap-6">
                                             <div class="col-span-3 sm:col-span-2">
                                                 <label for="zone_name" class="block text-sm font-medium text-gray-700">
-                                                    Zone Name
+                                                    Record Name (use @ for root)
                                                 </label>
                                                 <div class="mt-1 flex rounded-md shadow-sm">
-                                                    <input type="text" value="{{old('name')}}" name="name" id="name" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="google.com">
+                                                    <input required type="text" value="{{old('name')}}" name="name" id="name" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="@">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="grid grid-cols-3 gap-6">
-                                            <div class="col-span-3 sm:col-span-2">
-                                                <label for="owner" class="block text-sm font-medium text-gray-700">
-                                                    Owner Email
-                                                </label>
-                                                <div class="mt-1 flex rounded-md shadow-sm">
-                                                    <input type="email" value="{{old('owner')}}" name="owner" id="owner" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="owner@somedomain.com">
-                                                </div>
+                                        <div class="grid grid-cols-3 gap-4">
+                                            <div class="grid-cols-1">
+                                                <label for="A" class="block text-sm font-medium text-gray-700">A Record Settings</label>
+                                                <select id="A" name="A" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                    <option value="loadbalance" selected >Load Balance</option>
+                                                    <option value="all">All</option>
+                                                    <option value="random">Random</option>
+                                                </select>
+                                            </div>
+                                            <div class="grid-cols-1">
+                                                <label for="AAAA" class="block text-sm font-medium text-gray-700">AAAA Record Settings</label>
+                                                <select id="AAAA" name="AAAA" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                    <option value="loadbalance" >Load Balance</option>
+                                                    <option value="all">All</option>
+                                                    <option value="random" selected>Random</option>
+                                                </select>
+                                            </div>
+                                            <div class="grid-cols-1">
+                                                <label for="TXT" class="block text-sm font-medium text-gray-700">TXT Record Settings</label>
+                                                <select id="TXT" name="TXT" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                    <option value="loadbalance"  >Load Balance</option>
+                                                    <option value="all" selected>All</option>
+                                                    <option value="random">Random</option>
+                                                </select>
+                                            </div>
+                                            <div class="grid-cols-1">
+                                                <label for="CNAME" class="block text-sm font-medium text-gray-700">CNAME Record Settings</label>
+                                                <select id="CNAME" name="CNAME" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                    <option value="loadbalance" selected>Load Balance</option>
+                                                    <option value="all">All</option>
+                                                    <option value="random">Random</option>
+                                                </select>
+                                            </div>
+                                            <div class="grid-cols-1">
+                                                <label for="NS" class="block text-sm font-medium text-gray-700">NS Record Settings</label>
+                                                <select id="NS" name="NS" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                    <option value="loadbalance">Load Balance</option>
+                                                    <option value="all" selected>All</option>
+                                                    <option value="random">Random</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -66,7 +98,5 @@
                 </div>
             </div>
         </div>
-        <!-- /End replace -->
     </div>
-
 </x-app-layout>

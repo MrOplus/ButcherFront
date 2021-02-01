@@ -9,9 +9,13 @@ class RecordEntry extends Model
 {
     use HasFactory;
     protected $table = "record_entries";
-
+    protected $hidden = ['id','record_id','updated_at','created_at'];
+    protected $fillable = ['type','weight','ttl','order','value'];
 
     function record(){
         return $this->belongsTo(ZoneRecord::class,'record_id');
+    }
+    function setValueAttribute($value){
+        $this->attributes['value'] = strtolower($value);
     }
 }

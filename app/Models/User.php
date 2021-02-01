@@ -44,4 +44,7 @@ class User extends Authenticatable
     function zones(){
         return $this->hasMany(Zone::class,"user_id");
     }
+    function records() {
+        return $this->hasManyThrough(ZoneRecord::class,Zone::class);
+    }
 }
