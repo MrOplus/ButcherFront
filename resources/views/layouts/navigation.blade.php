@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('add-zone')" :active="request()->routeIs('add-zone')">
                         Add New Zone
                     </x-nav-link>
+                    <x-nav-link :href="route('config-apply')" :active="request()->routeIs('config-apply')">
+                        Apply Configurations
+                    </x-nav-link>
                 </div>
             </div>
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\EntryController;
 use App\Http\Controllers\RecordsController;
 use App\Http\Controllers\ZoneController;
@@ -42,6 +43,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/record/{record_id}/entries/edit',[EntryController::class , "editEntry"])->name('edit-zone-record-entry');
     Route::post('/dashboard/record/{record_id}/entries/edit',[EntryController::class , "doEditEntry"])->name('edit-zone-record-entry');
     Route::any('/dashboard/record/{record_id}/entries/delete',[EntryController::class , "deleteEntry"])->name('delete-zone-record-entry');
+
+
+    Route::get('/dashboard/config/apply',[ConfigController::class , "confirm"])->name('config-apply');
+    Route::post('/dashboard/config/apply',[ConfigController::class , "apply"])->name('config-apply');
 
 
 
