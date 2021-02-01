@@ -17,4 +17,7 @@ class ZoneRecord extends Model
     function entries() {
         return $this->hasMany(RecordEntry::class,'record_id');
     }
+    function setNameAttribute($value){
+        $this->attributes['name'] = strtolower($value);
+    }
 }

@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Add New Zone
-        </h2>
+        <x-appbar :zone="$record->zone->id">
+            Edit Record > {{$record->name}}.{{$record->zone->name}}
+        </x-appbar>
     </x-slot>
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <!-- Replace with your content -->
@@ -12,35 +12,51 @@
                     <div class="md:grid md:grid-cols-3 md:gap-6">
                         <div class="md:col-span-1">
                             <div class="px-4 sm:px-0">
-                                <h3 class="text-lg font-medium leading-6 text-gray-900">Zone</h3>
+                                <h3 class="text-lg font-medium leading-6 text-gray-900">Record</h3>
                                 <p class="mt-1 text-sm text-gray-600">
-                                    Zone information (like owner email) will be displayed publicly, so be careful what you share.
+                                    Record information<br>
+                                    Record Types hint:<br>
+                                    All : returns all records as a single RR<br>
+                                    Load Balance : creates a FIFO Queue<br>
+                                    Random : return random record from all record
                                 </p>
                             </div>
                         </div>
                         <div class="mt-5 md:mt-0 md:col-span-2">
-                            <form action="{{route('edit-zone',$zone->id)}}" method="POST">
+                            <form action="{{route('edit-zone-record',$record->id)}}" method="POST">
                                 @csrf
                                 <div class="shadow sm:rounded-md sm:overflow-hidden">
                                     <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
                                         <div class="grid grid-cols-3 gap-6">
                                             <div class="col-span-3 sm:col-span-2">
                                                 <label for="zone_name" class="block text-sm font-medium text-gray-700">
-                                                    Zone Name
+                                                    Record Name (use @ for root)
                                                 </label>
                                                 <div class="mt-1 flex rounded-md shadow-sm">
-                                                    <input type="text" readonly value="{{$zone->name}}" name="name" id="name" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="google.com">
+                                                    <input required readonly type="text" value="{{$record->name}}" name="name" id="name" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="@">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="grid grid-cols-3 gap-6">
-                                            <div class="col-span-3 sm:col-span-2">
-                                                <label for="owner" class="block text-sm font-medium text-gray-700">
-                                                    Owner Email
-                                                </label>
-                                                <div class="mt-1 flex rounded-md shadow-sm">
-                                                    <input type="email" value="{{$zone->owner}}" name="owner" id="owner" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300" placeholder="owner@somedomain.com">
-                                                </div>
+                                        <div class="grid grid-cols-3 gap-4">
+                                            <div class="grid-cols-1">
+                                                <label for="A" class="block text-sm font-medium text-gray-700">A Record Settings</label>
+                                                <x-record-setting :record="'A'" :type="$record->A" />
+                                            </div>
+                                            <div class="grid-cols-1">
+                                                <label for="AAAA" class="block text-sm font-medium text-gray-700">AAAA Record Settings</label>
+                                                <x-record-setting :record="'AAAA'" :type="$record->AAAA" />
+                                            </div>
+                                            <div class="grid-cols-1">
+                                                <label for="TXT" class="block text-sm font-medium text-gray-700">TXT Record Settings</label>
+                                                <x-record-setting :record="'TXT'" :type="$record->TXT" />
+                                            </div>
+                                            <div class="grid-cols-1">
+                                                <label for="CNAME" class="block text-sm font-medium text-gray-700">CNAME Record Settings</label>
+                                                <x-record-setting :record="'CNAME'" :type="$record->CNAME" />
+                                            </div>
+                                            <div class="grid-cols-1">
+                                                <label for="NS" class="block text-sm font-medium text-gray-700">NS Record Settings</label>
+                                                <x-record-setting :record="'NS'" :type="$record->NS" />
                                             </div>
                                         </div>
                                     </div>

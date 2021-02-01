@@ -15,7 +15,7 @@ class ZoneController extends Controller
         $request->validate(['name'=>'required|unique:zones','owner'=>'required|email']);
         $zone = auth()->user()->zones()->create($request->only(['name','owner']));
         if($zone){
-            return redirect()->route('show-zone-record',$zone->id);
+            return redirect()->route('show-zone-records',$zone->id);
         }else{
             return view('app/zone/create')->withErrors(["Unable to create record"]);
         }

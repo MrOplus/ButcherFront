@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ $zone->name }} Records | <a class="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{route('add-zone-record',$zone->id)}}">New Record</a>
-        </h2>
+        <x-appbar :zone="$zone->id">
+            {{ $zone->name }} Records
+        </x-appbar>
     </x-slot>
 
     <div class="py-12">
@@ -45,7 +45,7 @@
                                                         <div class="text-sm text-gray-500"></div>
                                                     </td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                        <a href="{{action([\App\Http\Controllers\EntryController::class,"showEntries"],$record->id)}}" class="text-indigo-600 hover:text-indigo-900">Records</a> | <a href="{{action([\App\Http\Controllers\RecordsController::class,"editRecord"],$record->id)}}" class="text-indigo-600 hover:text-indigo-900">Settings</a> | <a href="{{action([\App\Http\Controllers\RecordsController::class,"deleteRecord"],$record->id)}}" class="text-indigo-600 hover:text-indigo-900">Delete</a>
+                                                        <a href="{{action([\App\Http\Controllers\EntryController::class,"showEntries"],$record->id)}}" class="text-indigo-600 hover:text-indigo-900">Entries</a> | <a href="{{action([\App\Http\Controllers\RecordsController::class,"editRecord"],$record->id)}}" class="text-indigo-600 hover:text-indigo-900">Settings</a> | <a href="{{action([\App\Http\Controllers\RecordsController::class,"deleteRecord"],$record->id)}}" class="text-indigo-600 hover:text-indigo-900">Delete</a>
                                                     </td>
                                             </tr>
                                             @endforeach

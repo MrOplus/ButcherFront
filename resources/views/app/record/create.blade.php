@@ -1,8 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Add New Record
-        </h2>
+        <x-appbar :zone="$zone->id">
+            Add Record > {{$zone->name}}
+        </x-appbar>
     </x-slot>
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <!-- Replace with your content -->
@@ -98,7 +98,5 @@
                 </div>
             </div>
         </div>
-        <!-- /End replace -->
     </div>
-
 </x-app-layout>
